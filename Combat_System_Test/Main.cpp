@@ -84,8 +84,6 @@ void create_character(std::vector<Character*>& char_array, dpp::form_submit_t ev
 }
 
 
-const std::string BOT_TOKEN = "ADD TOKEN HERE"; //TODO BRO OBFUSCATE THIS
-
 int main() {
 	/*
 	Item* test = new Item("OBJETO DE PRUEBA", 10);
