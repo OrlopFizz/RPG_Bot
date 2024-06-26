@@ -9,6 +9,7 @@
 #include <dpp/dpp.h>
 #include <thread>
 #include <chrono>
+#include "Serialize.h"
 
 /*
 int random_number_gen() {
@@ -83,8 +84,34 @@ void create_character(std::vector<Character*>& char_array, dpp::form_submit_t ev
 }
 
 
-const std::string BOT_TOKEN = "MTIyMzA3MjQ2MzE1NjY3ODcxNg.GGsVMS.XCM5c_eDT59FFyweBlnfb1DXVYuuJJ6XmJDyVI";
+const std::string BOT_TOKEN = "ADD TOKEN HERE"; //TODO BRO OBFUSCATE THIS
 
+int main() {
+	/*
+	Item* test = new Item("OBJETO DE PRUEBA", 10);
+	Serial_Strategy* strat = new Item_Serializer(*test);
+	std::ofstream char_file;
+	char_file.open("Created_Characters.txt", std::ofstream::app);
+	char_file << (*strat).Serialize() << '\n';
+	*/
+	dpp::user* discord_user = new dpp::user();
+	discord_user->username = "Reborn675";
+	Character* chara = new Character(*discord_user, "Character Test", 100, 5, 6, 7);
+	
+	Item wep{ "Sword",10 };
+	Item arm{ "Shield", -5 };
+
+	chara->set_offensive(wep);//TODO this is not feasible, maybe add an unarmed weapon (fist)
+	chara->set_defensive(arm);
+
+	Serial_Strategy* strat = new Character_Serializer(*chara);
+	std::ofstream char_file;
+	char_file.open("Created_Characters.txt", std::ofstream::app);
+	char_file << (*strat).Serialize(1) << '\n';
+}
+
+
+/*
 int main() {
 
 	//create characters array
@@ -93,11 +120,13 @@ int main() {
 
 	//load_characters();
 
-	/*******************************BOT SETUP*********************************************/
+
+
+	//******************************BOT SETUP********************************************
 	dpp::cluster bot(BOT_TOKEN); //objeto cliente de la libreria de discord.
 
 	bot.on_log(dpp::utility::cout_logger());
-
+	
 	bot.on_slashcommand([&bot, &char_array](const dpp::slashcommand_t& event) { //cuando se recibe un comando, se agrega &bot para poderlo referenciar dentro de la funcion lambda. TODO ESTO ES UNA FUNCION LAMBDA QUE SE PASA A 
 		if (event.command.get_command_name() == "create_character") {
 			dpp::interaction_modal_response modal_test("character_creation_form", "Please enter your characters information");
@@ -139,28 +168,6 @@ int main() {
 			event.dialog(modal_test);
 			std::cout << "form sent" << '\n';
 			
-			/*
-			event.reply(""); //acknowledge interaction, callback functions execute with the API response. 
-			
-			Character* test = new Character("Conan the barbarian", 500, 4); //created on the heap
-			Character* test2 = new Character("King Arthur", 350, 6);
-			char_array.push_back(test);
-			char_array.push_back(test2);
-			
-			Item* weapon1 = new Item("Iron BattleAxe", 30);
-			Item* armor1 = new Item("leather light armor", -10);
-			Item* weapon2 = new Item("Excalibur", 20);
-			Item* armor2 = new Item("Chain Mail Armor", -20);
-
-			(*test).add_object_to_inventory(*weapon1);
-			(*test).add_object_to_inventory(*armor1);
-			(*test2).add_object_to_inventory(*weapon2);
-			(*test2).add_object_to_inventory(*armor2);
-
-			//std::string reply = test.get_name() + " Created" + '\n' + test2.get_name() + " Created";
-			bot.message_create(dpp::message(event.command.channel_id, (*char_array[0]).get_name() + " Created."));
-			bot.message_create(dpp::message(event.command.channel_id, (*char_array[1]).get_name() + " Created."));
-			*/
 		}
 		if (event.command.get_command_name() == "get_characters") {
 			event.reply("");
@@ -247,4 +254,4 @@ int main() {
 		}
 		});
 	bot.start(dpp::st_wait);
-}
+}*/

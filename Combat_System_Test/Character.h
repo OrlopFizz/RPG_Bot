@@ -20,6 +20,7 @@ class Character
 		int Strenght;
 		int Endurance;
 		int Agility;
+	
 	public: 
 		Character() : name{ "default" }, health_points{ 1 }, speed{ 0 }, Strenght{ 0 }, Endurance{ 0 }, Agility{ 0 } {};
 		Character(dpp::user powner, std::string pname, int phealth_points, int pstrenght, int pendurance, int pagility) :owner{powner}, name { pname }, health_points{ phealth_points }, Strenght{ pstrenght }, Endurance{ pendurance }, Agility{ pagility } {

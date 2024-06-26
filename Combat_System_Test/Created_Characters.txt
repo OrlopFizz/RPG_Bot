@@ -1,0 +1,14 @@
+Class Character:
+	Owner:Reborn675#0000
+	Name:Character Test
+	Health Points:100
+	Speed:7
+	Offensive Item:	Class Item:
+		Name:Sword
+		Damage:10
+	Defensive Item:	Class Item:
+		Name:Shield
+		Damage:-5
+	Strenght:5
+	Endurance:6
+	Agility:7
